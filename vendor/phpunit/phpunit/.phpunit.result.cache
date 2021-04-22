@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":262:{a:2:{s:7:"defects";a:2:{s:36:"PlayerSessionTest::testPlayerSession";i:4;s:45:"PlayerSessionTest::testPlayerSessionQuestions";i:4;}s:5:"times";a:2:{s:36:"PlayerSessionTest::testPlayerSession";d:0.002;s:45:"PlayerSessionTest::testPlayerSessionQuestions";d:0.002;}}}
