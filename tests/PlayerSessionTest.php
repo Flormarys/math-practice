@@ -40,13 +40,8 @@ final class PlayerSessionTest extends TestCase
     $this->assertEquals($this->session->getTotalPoints(), $pointsFromFile);
   }
 
-  // public function testAnswerQuestionCorrectly() {
-  //   $this->session->getQuestions()[0]->setStatus(true); // Question answered correctly
-  //   $this->assertTrue($this->session->getQuestions()[0]->getStatus());
-  // }
-  //
-  // public function testAnswerQuestionWrong() {
-  //   $this->session->getQuestions()[0]->setStatus(false); // Wrong answer
-  //   $this->assertFalse($this->session->getQuestions()[0]->getStatus());
-  // }
+  public function testAnswerQuestionCorrectly() {
+    $this->session->getQuestions()[0]->setStatus(true); // Question answered correctly
+    $this->assertTrue($this->session->getQuestions()[0]->getStatus());
+  }
 }

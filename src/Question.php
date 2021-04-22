@@ -13,33 +13,50 @@ class Question
   private $text;
   private $points;
   private $status;
+  private $answer;
 
   public function __construct(
     QuestionsType $type,
     string $text,
-    int $points
+    int $points,
+    string $answer
     )
   {
     $this->type = $type;
     $this->text = $text;
     $this->points = $points;
     $this->status = false;
+    $this->answer = $answer;
   }
 
-  public function getText() : string {
+  public function getText() : string
+  {
     return $this->text;
   }
 
-  public function getPoints() : int {
+  public function getPoints() : int
+  {
     return $this->points;
   }
 
-  public function getStatus() : int {
+  public function getStatus() : bool
+  {
     return $this->status;
   }
 
-  public function getType() : QuestionsType {
+  public function setStatus(bool $status) : void
+  {
+    $this->status = $status;
+  }
+
+  public function getType() : QuestionsType
+  {
     return $this->type;
+  }
+
+  public function getAnswer() : string
+  {
+    return $this->answer;
   }
 }
 

@@ -56,7 +56,8 @@ class PlayerSession
         $questionTypeObject,
         $question->text,
         $question->points,
-        false
+        false,
+        $question->answer,
       );
     }
   }

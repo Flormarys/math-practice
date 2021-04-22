@@ -21,11 +21,13 @@ class QuestionsType
     $this->level = $level;
   }
 
-  public function getName() : string {
+  public function getName() : string
+  {
     return $this->name;
   }
 
-  public function getLevel() : int {
+  public function getLevel() : int
+  {
     return $this->level;
   }
 
