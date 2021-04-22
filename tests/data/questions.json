@@ -7,7 +7,7 @@
 			},
 			"text": "This morning I woke up at %1% and ..... %2%,        10",
 			"points": 10,
-			"status": 1
+			"answer": 00:30
 		},
 		{
 			"questionsType": {
@@ -16,7 +16,7 @@
 			},
 			"text": "This morning I woke up at %1% and ..... %2%,        20",
 			"points": 20,
-			"status": 2
+			"answer": 01:30
 		},
 		{
 			"questionsType": {
@@ -25,7 +25,7 @@
 			},
 			"text": "This morning I woke up at %1% and ..... %2%,        30",
 			"points": 30,
-			"status": 3
+			"answer": 02:30
 		},
 		{
 			"questionsType": {
@@ -34,7 +34,7 @@
 			},
 			"text": "This morning I woke up at %1% and ..... %2%,         15",
 			"points": 10,
-			"status": 1
+			"answer": 00:30
 		},
 		{
 			"questionsType": {
@@ -43,7 +43,7 @@
 			},
 			"text": "This morning I woke up at %1% and ..... %2%,        25",
 			"points": 20,
-			"status": 2
+			"answer": 01:30
 		},
 		{
 			"questionsType": {
@@ -52,7 +52,7 @@
 	    },
 			"text": "This morning I woke up at %1% and ..... %2%,        35",
 			"points": 30,
-			"status": 3
+			"answer": 02:30
 		}
 	]
 }

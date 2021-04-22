@@ -17,14 +17,13 @@ class Question
   public function __construct(
     QuestionsType $type,
     string $text,
-    int $points,
-    int $status
+    int $points
     )
   {
     $this->type = $type;
     $this->text = $text;
     $this->points = $points;
-    $this->status = $status;
+    $this->status = false;
   }
 
   public function getText() : string {
