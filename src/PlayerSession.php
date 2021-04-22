@@ -12,18 +12,19 @@ class PlayerSession
   private $timeLimit;
   private $score;
   private $questions;
-
-  // Una propiedad questions
+  private $totalPoints;
 
   public function __construct(
     int $timeLimit,
     int $score,
-    array $questions
+    array $questions,
+    int $totalPoints
     )
   {
     $this->timeLimit = $timeLimit;
     $this->score = $score;
     $this->questions = $questions;
+    $this->totalPoints = $totalPoints;
   }
 
   public function setSessionTime(int $sessionTime) : void
@@ -55,7 +56,7 @@ class PlayerSession
         $questionTypeObject,
         $question->text,
         $question->points,
-        $question->status
+        false
       );
     }
   }
@@ -63,6 +64,14 @@ class PlayerSession
   public function getQuestions() : array
   {
     return $this->questions;
+  }
+
+  public function getTotalPoints() : int
+  {
+    foreach ($this->questions as $question) {
+      $this->totalPoints += $question->getPoints();
+    }
+    return $this->totalPoints;
   }
 
 }
