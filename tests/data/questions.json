@@ -2,57 +2,43 @@
 	"questions": [
 		{
 			"questionsType": {
-					"name": "difference",
-					"level": 1
+				"name": "difference",
+				"level": 1,
+				"timeLimit": 59
 			},
-			"text": "This morning I woke up at %1% and ..... %2%,        10",
+			"text": "How long passed between %1 and %2?",
 			"points": 10,
-			"answer": "00:30"
+			"operator": "-"
 		},
 		{
 			"questionsType": {
-					"name": "numerical",
-					"level": 2
+				"name": "difference",
+				"level": 1,
+				"timeLimit": 59
 			},
-			"text": "This morning I woke up at %1% and ..... %2%,        20",
-			"points": 20,
-			"answer": "01:30"
-		},
-		{
-			"questionsType": {
-					"name": "problem",
-					"level": 3
-			},
-			"text": "This morning I woke up at %1% and ..... %2%,        30",
-			"points": 30,
-			"answer": "02:30"
-		},
-		{
-			"questionsType": {
-					"name": "difference",
-					"level": 1
-			},
-			"text": "This morning I woke up at %1% and ..... %2%,         15",
+			"text": "Indicate time passed: %1 / %2?",
 			"points": 10,
-			"answer": "00:30"
+			"operator": "-"
 		},
 		{
 			"questionsType": {
-					"name": "numerical",
-					"level": 2
+				"name": "difference",
+				"level": 1,
+				"timeLimit": 59
 			},
-			"text": "This morning I woke up at %1% and ..... %2%,        25",
-			"points": 20,
-			"answer": "01:30"
+			"text": "If now it's %1, what time will be after %2 minutes/hours?",
+			"points": 10,
+			"operator": "+"
 		},
 		{
 			"questionsType": {
-	        "name": "problem",
-	        "level": 3
-	    },
-			"text": "This morning I woke up at %1% and ..... %2%,        35",
-			"points": 30,
-			"answer": "02:30"
+				"name": "problem",
+				"level": 3,
+				"timeLimit": 59
+			},
+			"text": "Mom woke up %1 minutes before %2. Indicate the time when Mom woke up.",
+			"points": 10,
+			"operator": "-"
 		}
 	]
 }

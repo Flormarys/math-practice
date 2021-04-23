@@ -1,9 +1,9 @@
 <?php
 /**
- * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
- * @license GPLv3 (or any later version)
- * PHP 7.4.16
- */
+* @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+* @license GPLv3 (or any later version)
+* PHP 7.4.16
+*/
 
 declare(strict_types=1);
 
@@ -53,15 +53,29 @@ final class PlayerSessionTest extends TestCase
         $this->assertEquals($this->session->getTotalPoints(), $pointsFromFile);
     }
 
-    public function testAnswerQuestionCorrectly()
-    {
-        $this->session->getQuestions()[0]->setStatus(true);
-        $this->assertTrue($this->session->getQuestions()[0]->getStatus());
+    public function testCorrectAnswerQuestions() {
+        $questions = $this->session->getQuestions();
+        $randomKeyQuestion = array_rand($questions, 1);
+        $question = $questions[$randomKeyQuestion];
+        $date_from = strtotime('2021-04-15 14:20');
+        $date_to = strtotime('2021-04-15 14:45');
+        $question->setFirstTime($date_from);
+        $question->setSecondTime($date_to);
+        if ($question->isBetweenTheLimits()) {
+            $operator = $question->getOperator();
+            $answer = $this->makeOperation($date_from, $date_to, $operator);
+            $this->assertEquals($answer, $question->getAnswer());
+        }
     }
 
-    public function testAnswerQuestionWrong()
-    {
-        $this->session->getQuestions()[0]->setStatus(false); // Wrong answer
-        $this->assertFalse($this->session->getQuestions()[0]->getStatus());
+    private function makeOperation(int $date1, int $date2, string $operator) {
+        switch ($operator) {
+            case '-':
+                return $date2 - $date1;
+            break;
+            default:
+                return $date1 + $date2;
+            break;
+        }
     }
 }

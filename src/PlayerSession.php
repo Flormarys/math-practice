@@ -1,9 +1,9 @@
 <?php
 /**
- * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
- * @license GPLv3 (or any later version)
- * PHP 7.4.16
- */
+* @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+* @license GPLv3 (or any later version)
+* PHP 7.4.16
+*/
 
 namespace MathPractice;
 
@@ -49,14 +49,15 @@ class PlayerSession
         foreach ($questionsJson->questions as $question) {
             $questionTypeObject = new QuestionsType(
                 $question->questionsType->name,
-                $question->questionsType->level
+                $question->questionsType->level,
+                $question->questionsType->timeLimit
             );
             $this->questions[] = new Question(
                 $questionTypeObject,
                 $question->text,
                 $question->points,
                 false,
-                $question->answer,
+                $question->operator
             );
         }
     }
@@ -73,7 +74,6 @@ class PlayerSession
         }
         return $this->totalPoints;
     }
-
 }
 
 ?>
