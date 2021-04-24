@@ -78,4 +78,19 @@ final class PlayerSessionTest extends TestCase
             break;
         }
     }
+
+    public function testWrongAnswerQuestions() {
+        $questions = $this->session->getQuestions();
+        $randomKeyQuestion = array_rand($questions, 1);
+        $question = $questions[$randomKeyQuestion];
+        $date_from = strtotime('2021-04-15 18:50');
+        $date_to = strtotime('2021-04-15 19:22');
+        $question->setFirstTime($date_from);
+        $question->setSecondTime($date_to);
+        if ($question->isBetweenTheLimits()) {
+            $operator = $question->getOperator();
+            $answer = $this->makeOperation($date_from, $date_to, $operator) + 100;
+            $this->assertNotEquals($answer, $question->getAnswer());
+        }
+    }
 }
