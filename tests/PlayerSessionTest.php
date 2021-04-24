@@ -93,4 +93,16 @@ final class PlayerSessionTest extends TestCase
             $this->assertNotEquals($answer, $question->getAnswer());
         }
     }
+
+    public function testOutsideLimitAnswerQuestions() {
+        $questions = $this->session->getQuestions();
+        $randomKeyQuestion = array_rand($questions, 1);
+        $question = $questions[$randomKeyQuestion];
+        $timeLimit = $question->getType()->getTimeLimit();
+        $date_from = strtotime('2021-04-15 18:50');
+        $date_to = $date_from + $timeLimit + 10;
+        $question->setFirstTime($date_from);
+        $question->setSecondTime($date_to);
+        $this->assertFalse($question->isBetweenTheLimits());
+    }
 }

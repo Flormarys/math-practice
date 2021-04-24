@@ -74,8 +74,8 @@ class Question
 
     public function isBetweenTheLimits() : bool
     {
-        $checkTimeLimit = $this->secondTime - $this->firstTime;
-        if($checkTimeLimit <= $this->type->getTimeLimit()){
+        $timeDifference = $this->secondTime - $this->firstTime;
+        if($timeDifference <= $this->type->getTimeLimit()){
             return true;
         }
         return false;
