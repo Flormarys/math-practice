@@ -32,7 +32,6 @@ final class QuestionTest extends TestCase
         $this->assertTrue($question->isBetweenTheLimits());
         $question->getType()->setLimit(60 * 9999999);
         $this->assertTrue($question->isBetweenTheLimits());
-
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:21');
         $question->setFirstTime($date_from);
@@ -45,16 +44,15 @@ final class QuestionTest extends TestCase
 
     public function testIncorrectLimits() {
         $question = $this->getNewQuestion();
-        $question->setLimit(59);
+        $question->getType()->setLimit(59);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
         $question->setFirstTime($date_from);
         $question->setSecondTime($date_to);
-
-        $question->setLimit(-1);
-        $this->assertEquals($question->getLimit(), 59);
-        $question->setLimit(-200);
-        $this->assertEquals($question->getLimit(), 59);
+        $question->getType()->setLimit(-1);
+        $this->assertEquals($question->getType()->getTimeLimit(), 59);
+        $question->getType()->setLimit(-200);
+        $this->assertEquals($question->getType()->getTimeLimit(), 59);
     }
 
     public function testQuestionText() {
