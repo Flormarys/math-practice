@@ -1,9 +1,9 @@
 <?php
 /**
-* @author  Flormarys Diaz <flormarysdiaz@gmail.com>
-* @license GPLv3 (or any later version)
-* PHP 7.4.16
-*/
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.4.16
+ */
 
 namespace MathPractice;
 
@@ -36,6 +36,11 @@ class QuestionsType
     public function getTimeLimit() : int
     {
         return $this->timeLimit;
+    }
+
+    public function setLimit(int $timeLimit) : void
+    {
+        $this->timeLimit = $timeLimit;
     }
 
 }

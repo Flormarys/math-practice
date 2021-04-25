@@ -1,9 +1,9 @@
 <?php
 /**
-* @author  Flormarys Diaz <flormarysdiaz@gmail.com>
-* @license GPLv3 (or any later version)
-* PHP 7.4.16
-*/
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.4.16
+ */
 
 declare(strict_types=1);
 
@@ -15,13 +15,13 @@ final class PlayerSessionTest extends TestCase
 
     private $session;
     private $questionsFromFile;
+    const QUESTIONS_FILE_PATH = __DIR__ . '/data/questions.json';
 
     protected function setUp() : void
     {
         $this->session = new \MathPractice\PlayerSession(25, 50, [], 0);
-        $filePath = __DIR__ . '/data/questions.json';
-        $this->session->addQuestionsFromFile($filePath);
-        $jsonDataEncoded = file_get_contents($filePath);
+        $this->session->addQuestionsFromFile(self::QUESTIONS_FILE_PATH);
+        $jsonDataEncoded = file_get_contents(self::QUESTIONS_FILE_PATH);
         $questionsJson = json_decode($jsonDataEncoded);
         $this->questionsFromFile = $questionsJson->questions;
         parent::setUp();
@@ -53,7 +53,8 @@ final class PlayerSessionTest extends TestCase
         $this->assertEquals($this->session->getTotalPoints(), $pointsFromFile);
     }
 
-    public function testCorrectAnswerQuestions() {
+    public function testCorrectAnswerQuestions()
+    {
         $questions = $this->session->getQuestions();
         $randomKeyQuestion = array_rand($questions, 1);
         $question = $questions[$randomKeyQuestion];
@@ -68,18 +69,20 @@ final class PlayerSessionTest extends TestCase
         }
     }
 
-    private function makeOperation(int $date1, int $date2, string $operator) {
+    private function makeOperation(int $date1, int $date2, string $operator)
+    {
         switch ($operator) {
-            case '-':
-                return $date2 - $date1;
+        case '-':
+            return $date2 - $date1;
             break;
-            default:
-                return $date1 + $date2;
+        default:
+            return $date1 + $date2;
             break;
         }
     }
 
-    public function testWrongAnswerQuestions() {
+    public function testWrongAnswerQuestions()
+    {
         $questions = $this->session->getQuestions();
         $randomKeyQuestion = array_rand($questions, 1);
         $question = $questions[$randomKeyQuestion];
@@ -94,7 +97,8 @@ final class PlayerSessionTest extends TestCase
         }
     }
 
-    public function testOutsideLimitAnswerQuestions() {
+    public function testOutsideLimitAnswerQuestions()
+    {
         $questions = $this->session->getQuestions();
         $randomKeyQuestion = array_rand($questions, 1);
         $question = $questions[$randomKeyQuestion];

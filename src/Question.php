@@ -1,9 +1,9 @@
 <?php
 /**
-* @author  Flormarys Diaz <flormarysdiaz@gmail.com>
-* @license GPLv3 (or any later version)
-* PHP 7.4.16
-*/
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.4.16
+ */
 
 namespace MathPractice;
 
@@ -75,22 +75,25 @@ class Question
     public function isBetweenTheLimits() : bool
     {
         $timeDifference = $this->secondTime - $this->firstTime;
-        if($timeDifference <= $this->type->getTimeLimit()){
+        if ($timeDifference <= $this->type->getTimeLimit()) {
             return true;
         }
         return false;
     }
 
-    public function getAnswer() {
+    public function getAnswer() : int
+    {
         switch ($this->operator) {
-            case '-':
-                return $this->secondTime - $this->firstTime;
+        case '-':
+            return $this->secondTime - $this->firstTime;
             break;
-            case "+":
-                return $this->secondTime + $this->firstTime;
+        case "+":
+            return $this->secondTime + $this->firstTime;
             break;
         }
     }
+
+
 
 }
 
