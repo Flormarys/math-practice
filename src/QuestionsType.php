@@ -40,7 +40,7 @@ class QuestionsType
 
     public function setLimit(int $timeLimit) : void
     {
-        if ($timeLimit >= 0){
+        if ($timeLimit >= 0) {
             $this->timeLimit = $timeLimit;
         }
     }

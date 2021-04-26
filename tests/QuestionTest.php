@@ -40,7 +40,8 @@ final class QuestionTest extends TestCase
         $this->assertFalse($question->isBetweenTheLimits());
     }
 
-    public function testIncorrectLimits() {
+    public function testIncorrectLimits()
+    {
         $question = $this->getNewQuestion();
         $question->getType()->setLimit(59);
         $date_from = strtotime('2021-04-15 14:20');
@@ -52,7 +53,8 @@ final class QuestionTest extends TestCase
         $this->assertEquals($question->getType()->getTimeLimit(), 59);
     }
 
-    public function testQuestionText() {
+    public function testQuestionText()
+    {
         $question = $this->getNewQuestion();
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
@@ -72,14 +74,15 @@ final class QuestionTest extends TestCase
         }
     }
 
-    public function testTryAnswers() {
+    public function testTryAnswers()
+    {
         $question = $this->getNewQuestion();
-        $question->setLimit(60 * 60);
+        $question->getType()->setLimit(60 * 60);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
         $question->setVariables($date_from, $date_to);
-        $correctAnswer = 60 * 25; // 25 minutes
-
+        $correctAnswer = 60 * 25;
+        $question->setOperator("-");
         $this->assertEquals($question->getAnswer(), $correctAnswer);
         $this->assertFalse($question->tryAnswer($correctAnswer + 60));
         $this->assertFalse($question->tryAnswer($correctAnswer - 60));

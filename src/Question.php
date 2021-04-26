@@ -52,6 +52,11 @@ class Question
         $this->status = $status;
     }
 
+    public function setOperator(string $operator) : void
+    {
+        $this->operator = $operator;
+    }
+
     public function getType() : QuestionsType
     {
         return $this->type;
@@ -64,7 +69,7 @@ class Question
 
     public function setVariables(int $firstTime, int $secondTime) : void
     {
-        if($firstTime > $secondTime) {
+        if ($firstTime > $secondTime) {
             throw new \Exception("First value must be bellow second value");
             return;
         }
@@ -74,7 +79,7 @@ class Question
 
     public function isBetweenTheLimits() : bool
     {
-        if(!empty($this->firstTime)){
+        if (!empty($this->firstTime)) {
             $timeDifference = $this->secondTime - $this->firstTime;
             if ($timeDifference <= $this->type->getTimeLimit()) {
                 return true;
@@ -87,10 +92,10 @@ class Question
     {
         switch ($this->operator) {
         case '-':
-            return $this->secondTime - $this->firstTime;
+            return $this->answer = $this->secondTime - $this->firstTime;
             break;
-        case "+":
-            return $this->secondTime + $this->firstTime;
+        default:
+            return $this->answer = $this->secondTime + $this->firstTime;
             break;
         }
     }
@@ -103,6 +108,15 @@ class Question
         $this->text = str_replace("%2", $secondTime, $firstVariableReplaced);
         return $this->text;
     }
+
+    public function tryAnswer(int $tryingToAnswer) : bool
+    {
+        if ($this->answer == $tryingToAnswer) {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 ?>
