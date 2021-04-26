@@ -60,8 +60,7 @@ final class PlayerSessionTest extends TestCase
         $question = $questions[$randomKeyQuestion];
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         if ($question->isBetweenTheLimits()) {
             $operator = $question->getOperator();
             $answer = $this->makeOperation($date_from, $date_to, $operator);
@@ -88,8 +87,7 @@ final class PlayerSessionTest extends TestCase
         $question = $questions[$randomKeyQuestion];
         $date_from = strtotime('2021-04-15 18:50');
         $date_to = strtotime('2021-04-15 19:22');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         if ($question->isBetweenTheLimits()) {
             $operator = $question->getOperator();
             $answer = $this->makeOperation($date_from, $date_to, $operator) + 100;
@@ -105,8 +103,7 @@ final class PlayerSessionTest extends TestCase
         $timeLimit = $question->getType()->getTimeLimit();
         $date_from = strtotime('2021-04-15 18:50');
         $date_to = $date_from + $timeLimit + 10;
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         $this->assertFalse($question->isBetweenTheLimits());
     }
 }

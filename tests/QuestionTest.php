@@ -21,21 +21,19 @@ final class QuestionTest extends TestCase
         $question->getType()->setLimit(60 * 20);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         $this->assertFalse($question->isBetweenTheLimits());
         $question->getType()->setLimit(60 * 24);
         $this->assertFalse($question->isBetweenTheLimits());
         $question->getType()->setLimit((60 * 25) - 1);
         $this->assertFalse($question->isBetweenTheLimits());
         $question->getType()->setLimit(60 * 25);
-        $this->assertTrue($question->isBetweenTheLimits());
+        $this->assertTrue($question->isBetweenTheLimits()); // cumple
         $question->getType()->setLimit(60 * 9999999);
         $this->assertTrue($question->isBetweenTheLimits());
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:21');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         $question->getType()->setLimit(60);
         $this->assertTrue($question->isBetweenTheLimits());
         $question->getType()->setLimit(59);
@@ -47,8 +45,7 @@ final class QuestionTest extends TestCase
         $question->getType()->setLimit(59);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         $question->getType()->setLimit(-1);
         $this->assertEquals($question->getType()->getTimeLimit(), 59);
         $question->getType()->setLimit(-200);
@@ -59,24 +56,20 @@ final class QuestionTest extends TestCase
         $question = $this->getNewQuestion();
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
-        $question->setLimit(60 * 60);
+        $question->setVariables($date_from, $date_to);
+        $question->getType()->setLimit(60 * 60);
         $this->assertTrue($question->isBetweenTheLimits());
         $this->assertEquals(
             $question->getReeplacedText(),
             'Indicate difference between 2:20 PM and 2:45 PM'
         );
-
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 13:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
-        $this->assertFalse($question->isBetweenTheLimits());
-        $this->assertEquals(
-            $question->getReeplacedText(),
-            'Indicate difference between %1 and %2'
-        );
+        try {
+            $question->setVariables($date_from, $date_to);
+        } catch (\Exception $e) {
+            $this->assertEquals($e->getMessage(), 'First value must be bellow second value');
+        }
     }
 
     public function testTryAnswers() {
@@ -84,8 +77,7 @@ final class QuestionTest extends TestCase
         $question->setLimit(60 * 60);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
-        $question->setFirstTime($date_from);
-        $question->setSecondTime($date_to);
+        $question->setVariables($date_from, $date_to);
         $correctAnswer = 60 * 25; // 25 minutes
 
         $this->assertEquals($question->getAnswer(), $correctAnswer);

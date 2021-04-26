@@ -62,21 +62,23 @@ class Question
         return $this->operator;
     }
 
-    public function setFirstTime(int $firstTime) : void
+    public function setVariables(int $firstTime, int $secondTime) : void
     {
+        if($firstTime > $secondTime) {
+            throw new \Exception("First value must be bellow second value");
+            return;
+        }
         $this->firstTime = $firstTime;
-    }
-
-    public function setSecondTime(int $secondTime) : void
-    {
         $this->secondTime = $secondTime;
     }
 
     public function isBetweenTheLimits() : bool
     {
-        $timeDifference = $this->secondTime - $this->firstTime;
-        if ($timeDifference <= $this->type->getTimeLimit()) {
-            return true;
+        if(!empty($this->firstTime)){
+            $timeDifference = $this->secondTime - $this->firstTime;
+            if ($timeDifference <= $this->type->getTimeLimit()) {
+                return true;
+            }
         }
         return false;
     }
@@ -93,8 +95,14 @@ class Question
         }
     }
 
-
-
+    public function getReeplacedText() : string
+    {
+        $firstTime = date("g:i A", $this->firstTime);
+        $secondTime = date("g:i A", $this->secondTime);
+        $firstVariableReplaced = str_replace("%1", $firstTime, $this->text);
+        $this->text = str_replace("%2", $secondTime, $firstVariableReplaced);
+        return $this->text;
+    }
 }
 
 ?>
