@@ -80,9 +80,9 @@ final class QuestionTest extends TestCase
         $question->getType()->setLimit(60 * 60);
         $date_from = strtotime('2021-04-15 14:20');
         $date_to = strtotime('2021-04-15 14:45');
+        $question->setOperator("-");
         $question->setVariables($date_from, $date_to);
         $correctAnswer = 60 * 25;
-        $question->setOperator("-");
         $this->assertEquals($question->getAnswer(), $correctAnswer);
         $this->assertFalse($question->tryAnswer($correctAnswer + 60));
         $this->assertFalse($question->tryAnswer($correctAnswer - 60));

@@ -75,6 +75,7 @@ class Question
         }
         $this->firstTime = $firstTime;
         $this->secondTime = $secondTime;
+        $this->calculateAnswer();
     }
 
     public function isBetweenTheLimits() : bool
@@ -90,12 +91,17 @@ class Question
 
     public function getAnswer() : int
     {
+        return $this->answer;
+    }
+
+    private function calculateAnswer() : void
+    {
         switch ($this->operator) {
         case '-':
-            return $this->answer = $this->secondTime - $this->firstTime;
+            $this->answer = $this->secondTime - $this->firstTime;
             break;
         default:
-            return $this->answer = $this->secondTime + $this->firstTime;
+            $this->answer = $this->secondTime + $this->firstTime;
             break;
         }
     }

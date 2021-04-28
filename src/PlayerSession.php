@@ -42,23 +42,31 @@ class PlayerSession
         }
     }
 
-    public function addQuestionsFromFile(string $filePath) : void
+    public function addQuestionsFromFile(string $filePath, array $filter = []) : void
     {
         $jsonDataEncoded = file_get_contents($filePath);
         $questionsJson = json_decode($jsonDataEncoded);
         foreach ($questionsJson->questions as $question) {
-            $questionTypeObject = new QuestionsType(
-                $question->questionsType->name,
-                $question->questionsType->level,
-                $question->questionsType->timeLimit
-            );
-            $this->questions[] = new Question(
-                $questionTypeObject,
-                $question->text,
-                $question->points,
-                false,
-                $question->operator
-            );
+            if (empty($filter)
+                || (                !empty($filter)
+                && (                (                array_key_exists('points', $filter)
+                && $filter["points"] == $question->points                )
+                || (                array_key_exists('level', $filter)
+                && $filter["level"] == $question->questionsType->level                )))
+            ) {
+                $questionTypeObject = new QuestionsType(
+                    $question->questionsType->name,
+                    $question->questionsType->level,
+                    $question->questionsType->timeLimit
+                );
+                $this->questions[] = new Question(
+                    $questionTypeObject,
+                    $question->text,
+                    $question->points,
+                    false,
+                    $question->operator
+                );
+            }
         }
     }
 
@@ -74,6 +82,21 @@ class PlayerSession
         }
         return $this->totalPoints;
     }
+
+    public function answerQuestion(int $questionToAnswer, int $answer)
+    {
+        $this->questions[$questionToAnswer]->getAnswer();
+        $points = $this->questions[$questionToAnswer]->getPoints();
+        if ($this->questions[$questionToAnswer]->tryAnswer($answer)) {
+            $this->score += $points;
+        }
+    }
+
+    public function getScore() : int
+    {
+        return $this->score;
+    }
+
 }
 
 ?>

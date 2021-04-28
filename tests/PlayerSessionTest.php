@@ -19,7 +19,7 @@ final class PlayerSessionTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->session = new \MathPractice\PlayerSession(25, 50, [], 0);
+        $this->session = new \MathPractice\PlayerSession(25, 0, [], 0);
         $this->session->addQuestionsFromFile(self::QUESTIONS_FILE_PATH);
         $jsonDataEncoded = file_get_contents(self::QUESTIONS_FILE_PATH);
         $questionsJson = json_decode($jsonDataEncoded);
@@ -105,5 +105,37 @@ final class PlayerSessionTest extends TestCase
         $date_to = $date_from + $timeLimit + 10;
         $question->setVariables($date_from, $date_to);
         $this->assertFalse($question->isBetweenTheLimits());
+    }
+
+    public function testReadQuestionsWithSpecificLevel()
+    {
+        $this->session = new \MathPractice\PlayerSession(25, 0, [], 0);
+        $this->session->addQuestionsFromFile(self::QUESTIONS_FILE_PATH, ['level' => 2]);
+        $questions = $this->session->getQuestions();
+        foreach ($questions as $question) {
+            $this->assertEquals($question->getType()->getLevel(), 2);
+        }
+    }
+
+    public function testCalculateScore()
+    {
+        $questions = $this->session->getQuestions();
+        $sessionScore = 0;
+        $totalQuestionsAnsweredCorrectly = 2;
+        $date_from = strtotime('2021-04-15 18:50');
+        $date_to = strtotime('2021-04-15 19:22');
+        foreach ($questions as $questionIndex => $question) {
+            $question->setVariables($date_from, $date_to);
+            $correctAnswer = $question->getAnswer();
+            $questionPoints = $question->getPoints();
+            if ($totalQuestionsAnsweredCorrectly > 0) {
+                $this->session->answerQuestion($questionIndex, $correctAnswer);
+                $sessionScore += $questionPoints;
+                $totalQuestionsAnsweredCorrectly--;
+                continue;
+            }
+            $this->session->answerQuestion($questionIndex, $correctAnswer + rand(1, 1000));
+        }
+        $this->assertEquals($this->session->getScore(), $sessionScore);
     }
 }

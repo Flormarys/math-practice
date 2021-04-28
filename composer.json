@@ -3,6 +3,11 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "3.*"
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit tests/",
+        "lint": "vendor/bin/phpcs src tests",
+        "auto-lint": "vendor/bin/phpcbf src tests"
+    },
     "autoload": {
       "psr-4": {
         "MathPractice\\":"src/"

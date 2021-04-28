@@ -26,8 +26,7 @@
 				"level": 3,
 				"timeLimit": 59
 			},
-			"text": "Jorge leaves his house at %1 and arrives at the school at %2.
-				Write how long it takes Jorge to walk to the school?",
+			"text": "Jorge leaves his house at %1 and arrives at the school at %2. Write how long it takes Jorge to walk to the school?",
 			"points": 10,
 			"operator": "-"
 		},
@@ -57,8 +56,7 @@
 				"level": 3,
 				"timeLimit": 59
 			},
-			"text": "Mary arrives at the cinema %2 after, the movie started at %1.
-			 	Write the time that Mary arrives at the cinema.",
+			"text": "Mary arrives at the cinema %2 after, the movie started at %1. Write the time that Mary arrives at the cinema.",
 			"points": 5,
 			"operator": "+"
 		},
@@ -68,8 +66,7 @@
 				"level": 4,
 				"timeLimit": 59
 			},
-			"text": "Each day at school the Math practice starts at %1, and finish %2 after.
-				Write the time the Math practice ends",
+			"text": "Each day at school the Math practice starts at %1, and finish %2 after. Write the time the Math practice ends",
 			"points": 10,
 			"operator": "+"
 		},
@@ -79,8 +76,7 @@
 				"level": 4,
 				"timeLimit": 59
 			},
-			"text": "Fernando goes to wait for the bus each day at %1, but the bus arrives at %2.
-				Write how long passed between that Fernando goes to wait the bus and the arrive time.",
+			"text": "Fernando goes to wait for the bus each day at %1, but the bus arrives at %2. Write how long passed between that Fernando goes to wait the bus and the arrive time.",
 			"points": 10,
 			"operator": "-"
 		},
@@ -90,8 +86,7 @@
 				"level": 4,
 				"timeLimit": 59
 			},
-			"text": "Lulu goes for a ride on her bike at% 1, she goes a long way from home,
-				when she decides to come back it takes% 2 to finally make it. Tell me the time that Lulu comes home.",
+			"text": "Lulu goes for a ride on her bike at% 1, she goes a long way from home when she decides to come back it takes %2 to finally make it. Tell me the time that Lulu comes home.",
 			"points": 10,
 			"operator": "+"
 		},
@@ -111,8 +106,7 @@
 				"level": 2,
 				"timeLimit": 59
 			},
-			"text": " Julia arrives %2 minutes before her %1 appointment.
-				Tell the time Julia arrives.",
+			"text": " Julia arrives %2 minutes before her %1 appointment. Tell the time Julia arrives.",
 			"points": 10,
 			"operator": "-"
 		},
@@ -122,10 +116,9 @@
 				"level": 3,
 				"timeLimit": 59
 			},
-			"text": "Joe go to the mall %2 before meeting his friend at %1.
-				Write the time that Joe arrives at the mall.",
+			"text": "Joe go to the mall %2 before meeting his friend at %1. Write the time that Joe arrives at the mall.",
 			"points": 5,
 			"operator": "-"
-		},
+		}
 	]
 }
