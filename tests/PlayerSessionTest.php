@@ -19,7 +19,7 @@ final class PlayerSessionTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->session = new \MathPractice\PlayerSession(25, 0, [], 0);
+        $this->session = new \MathPractice\PlayerSession(25, []);
         $this->session->addQuestionsFromFile(self::QUESTIONS_FILE_PATH);
         $jsonDataEncoded = file_get_contents(self::QUESTIONS_FILE_PATH);
         $questionsJson = json_decode($jsonDataEncoded);
@@ -109,7 +109,7 @@ final class PlayerSessionTest extends TestCase
 
     public function testReadQuestionsWithSpecificLevel()
     {
-        $this->session = new \MathPractice\PlayerSession(25, 0, [], 0);
+        $this->session = new \MathPractice\PlayerSession(25, []);
         $this->session->addQuestionsFromFile(self::QUESTIONS_FILE_PATH, ['level' => 2]);
         $questions = $this->session->getQuestions();
         foreach ($questions as $question) {

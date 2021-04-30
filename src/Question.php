@@ -73,8 +73,10 @@ class Question
             throw new \Exception("First value must be bellow second value");
             return;
         }
-        $this->firstTime = $firstTime;
-        $this->secondTime = $secondTime;
+        $firstTimeFixed = strtotime(date("H:i", $firstTime));
+        $secondTimeFixed = strtotime(date("H:i", $secondTime));
+        $this->firstTime = $firstTimeFixed;
+        $this->secondTime = $secondTimeFixed;
         $this->calculateAnswer();
     }
 
@@ -96,14 +98,11 @@ class Question
 
     private function calculateAnswer() : void
     {
-        switch ($this->operator) {
-        case '-':
+        if ($this->operator == "-") {
             $this->answer = $this->secondTime - $this->firstTime;
-            break;
-        default:
-            $this->answer = $this->secondTime + $this->firstTime;
-            break;
+            return;
         }
+        $this->answer = $this->secondTime + $this->firstTime;
     }
 
     public function getReeplacedText() : string
@@ -111,8 +110,8 @@ class Question
         $firstTime = date("g:i A", $this->firstTime);
         $secondTime = date("g:i A", $this->secondTime);
         $firstVariableReplaced = str_replace("%1", $firstTime, $this->text);
-        $this->text = str_replace("%2", $secondTime, $firstVariableReplaced);
-        return $this->text;
+        $textReplaced = str_replace("%2", $secondTime, $firstVariableReplaced);
+        return $textReplaced;
     }
 
     public function tryAnswer(int $tryingToAnswer) : bool

@@ -16,14 +16,11 @@ class PlayerSession
 
     public function __construct(
         int $timeLimit,
-        int $score,
         array $questions,
-        int $totalPoints
     ) {
         $this->timeLimit = $timeLimit;
-        $this->score = $score;
         $this->questions = $questions;
-        $this->totalPoints = $totalPoints;
+        $this->score = 0;
     }
 
     public function setSessionTime(int $sessionTime) : void
@@ -47,12 +44,12 @@ class PlayerSession
         $jsonDataEncoded = file_get_contents($filePath);
         $questionsJson = json_decode($jsonDataEncoded);
         foreach ($questionsJson->questions as $question) {
-            if (empty($filter)
-                || (                !empty($filter)
-                && (                (                array_key_exists('points', $filter)
-                && $filter["points"] == $question->points                )
-                || (                array_key_exists('level', $filter)
-                && $filter["level"] == $question->questionsType->level                )))
+            if (empty($filter) 
+                || (                !empty($filter) 
+                && (                (                array_key_exists('points', $filter) 
+                && $filter["points"] == $question->points                ) 
+                || (                array_key_exists('level', $filter) 
+                && $filter["level"] == $question->questionsType->level                )                )                )
             ) {
                 $questionTypeObject = new QuestionsType(
                     $question->questionsType->name,
@@ -83,9 +80,8 @@ class PlayerSession
         return $this->totalPoints;
     }
 
-    public function answerQuestion(int $questionToAnswer, int $answer)
+    public function answerQuestion(int $questionToAnswer, int $answer) : void
     {
-        $this->questions[$questionToAnswer]->getAnswer();
         $points = $this->questions[$questionToAnswer]->getPoints();
         if ($this->questions[$questionToAnswer]->tryAnswer($answer)) {
             $this->score += $points;
@@ -96,6 +92,22 @@ class PlayerSession
     {
         return $this->score;
     }
+
+    public function prepareQuestion(int $questionIndex) : bool
+    {
+        $questionToPrepare = $this->questions[$questionIndex];
+        $date_from = rand(1600000000, time());
+        $date_to = rand($date_from, $date_from + $questionToPrepare->getType()->getTimeLimit());
+        $questionToPrepare->setVariables($date_from, $date_to);
+        return $questionToPrepare->isBetweenTheLimits();
+    }
+
+    public function getQuestionText(int $questionIndex) : string
+    {
+        $questionToShow = $this->questions[$questionIndex];
+        return $questionToShow->getReeplacedText();
+    }
+
 
 }
 
