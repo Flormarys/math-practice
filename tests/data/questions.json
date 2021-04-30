@@ -8,7 +8,10 @@
 			},
 			"text": "Indicate how much time has passed between: %1 and %2",
 			"points": 5,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "minutes"
+			}
 		},
 		{
 			"questionsType": {
@@ -18,7 +21,10 @@
 			},
 			"text": "Recess begings at %1 it ends at %2. Write how long recess lasts.",
 			"points": 10,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "minutes"
+			}
 		},
 		{
 			"questionsType": {
@@ -28,7 +34,10 @@
 			},
 			"text": "Jorge leaves his house at %1 and arrives at the school at %2. Write how long it takes Jorge to walk to the school?",
 			"points": 10,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "minutes"
+			}
 		},
 		{
 			"questionsType": {
@@ -38,7 +47,11 @@
 			},
 			"text": "Its %1, tell the time in %2",
 			"points": 5,
-			"operator": "+"
+			"operation": {
+				"formula": ["%1", "+", "%2"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -48,7 +61,11 @@
 			},
 			"text": "If now is %1, what time will be in %2",
 			"points": 10,
-			"operator": "+"
+			"operation": {
+				"formula": ["%1", "+", "%2"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -58,7 +75,11 @@
 			},
 			"text": "Mary arrives at the cinema %2 after, the movie started at %1. Write the time that Mary arrives at the cinema.",
 			"points": 5,
-			"operator": "+"
+			"operation": {
+				"formula": ["%1", "+", "%2"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -68,7 +89,11 @@
 			},
 			"text": "Each day at school the Math practice starts at %1, and finish %2 after. Write the time the Math practice ends",
 			"points": 10,
-			"operator": "+"
+			"operation": {
+				"formula": ["%1", "+", "%2"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -78,7 +103,10 @@
 			},
 			"text": "Fernando goes to wait for the bus each day at %1, but the bus arrives at %2. Write how long passed between that Fernando goes to wait the bus and the arrive time.",
 			"points": 10,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "minutes"
+			}
 		},
 		{
 			"questionsType": {
@@ -88,7 +116,11 @@
 			},
 			"text": "Lulu goes for a ride on her bike at% 1, she goes a long way from home when she decides to come back it takes %2 to finally make it. Tell me the time that Lulu comes home.",
 			"points": 10,
-			"operator": "+"
+			"operation": {
+				"formula": ["%1", "+", "%2"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -98,7 +130,11 @@
 			},
 			"text": "Its %1, what time was it %2 ago ",
 			"points": 5,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -108,7 +144,11 @@
 			},
 			"text": " Julia arrives %2 minutes before her %1 appointment. Tell the time Julia arrives.",
 			"points": 10,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "time",
+				"minute": "%2"
+			}
 		},
 		{
 			"questionsType": {
@@ -118,7 +158,11 @@
 			},
 			"text": "Joe go to the mall %2 before meeting his friend at %1. Write the time that Joe arrives at the mall.",
 			"points": 5,
-			"operator": "-"
+			"operation": {
+				"formula": ["%2", "-", "%1"],
+				"result": "time",
+				"minute": "%2"
+			}
 		}
 	]
 }
