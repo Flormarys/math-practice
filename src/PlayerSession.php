@@ -16,11 +16,12 @@ class PlayerSession
 
     public function __construct(
         int $timeLimit,
-        array $questions,
+        array $questions
     ) {
         $this->timeLimit = $timeLimit;
         $this->questions = $questions;
         $this->score = 0;
+        $this->totalPoints = 0;
     }
 
     public function setSessionTime(int $sessionTime) : void
@@ -44,13 +45,24 @@ class PlayerSession
         $jsonDataEncoded = file_get_contents($filePath);
         $questionsJson = json_decode($jsonDataEncoded);
         foreach ($questionsJson->questions as $question) {
-            if (empty($filter) 
-                || (                !empty($filter) 
-                && (                (                array_key_exists('points', $filter) 
-                && $filter["points"] == $question->points                ) 
-                || (                array_key_exists('level', $filter) 
-                && $filter["level"] == $question->questionsType->level                )                )                )
+            if (
+                    empty($filter) ||
+                    (
+                        !empty($filter) &&
+                        (
+                            (
+                                array_key_exists('points', $filter) &&
+                                $filter["points"] == $question->points
+                            )||
+                            (
+                                array_key_exists('level', $filter) &&
+                                $filter["level"] == $question->questionsType->level
+                            )
+                        )
+                    )
             ) {
+                $date2Format = isset($question->operation->parameterFormat)
+                    ? $question->operation->parameterFormat : null;
                 $questionTypeObject = new QuestionsType(
                     $question->questionsType->name,
                     $question->questionsType->level,
@@ -61,7 +73,9 @@ class PlayerSession
                     $question->text,
                     $question->points,
                     false,
-                    $question->operator
+                    $question->operation->formula,
+                    $question->operation->answerFormat,
+                    $date2Format,
                 );
             }
         }
@@ -80,12 +94,14 @@ class PlayerSession
         return $this->totalPoints;
     }
 
-    public function answerQuestion(int $questionToAnswer, int $answer) : void
+    public function answerQuestion(int $questionToAnswer, $answer) : bool
     {
         $points = $this->questions[$questionToAnswer]->getPoints();
         if ($this->questions[$questionToAnswer]->tryAnswer($answer)) {
             $this->score += $points;
+            return true;
         }
+        return false;
     }
 
     public function getScore() : int

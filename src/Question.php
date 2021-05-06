@@ -13,23 +13,29 @@ class Question
     private $text;
     private $points;
     private $status;
-    private $operator;
     private $firstTime;
     private $secondTime;
     private $answer;
+    private $formula;
+    private $answerFormat;
+    private $parameterFormat;
 
     public function __construct(
         QuestionsType $type,
         string $text,
         int $points,
         bool $status,
-        string $operator
+        array $formula,
+        string $answerFormat,
+        ?string $parameterFormat = null
     ) {
         $this->type = $type;
         $this->text = $text;
         $this->points = $points;
         $this->status = false;
-        $this->operator = $operator;
+        $this->formula = $formula;
+        $this->answerFormat = $answerFormat;
+        $this->parameterFormat = (isset($parameterFormat)) ? $parameterFormat : null;
     }
 
     public function getText() : string
@@ -52,19 +58,9 @@ class Question
         $this->status = $status;
     }
 
-    public function setOperator(string $operator) : void
-    {
-        $this->operator = $operator;
-    }
-
     public function getType() : QuestionsType
     {
         return $this->type;
-    }
-
-    public function getOperator() : string
-    {
-        return $this->operator;
     }
 
     public function setVariables(int $firstTime, int $secondTime) : void
@@ -73,17 +69,15 @@ class Question
             throw new \Exception("First value must be bellow second value");
             return;
         }
-        $firstTimeFixed = strtotime(date("H:i", $firstTime));
-        $secondTimeFixed = strtotime(date("H:i", $secondTime));
-        $this->firstTime = $firstTimeFixed;
-        $this->secondTime = $secondTimeFixed;
+        $this->firstTime = new Variable($firstTime);
+        $this->secondTime = new Variable($secondTime);
         $this->calculateAnswer();
     }
 
     public function isBetweenTheLimits() : bool
     {
         if (!empty($this->firstTime)) {
-            $timeDifference = $this->secondTime - $this->firstTime;
+            $timeDifference = $this->secondTime->getValue() - $this->firstTime->getValue();
             if ($timeDifference <= $this->type->getTimeLimit()) {
                 return true;
             }
@@ -91,37 +85,34 @@ class Question
         return false;
     }
 
-    public function getAnswer() : int
+    public function getAnswer() : Variable
     {
         return $this->answer;
     }
 
-    private function calculateAnswer() : void
+    private function calculateAnswer() : Variable
     {
-        if ($this->operator == "-") {
-            $this->answer = $this->secondTime - $this->firstTime;
-            return;
-        }
-        $this->answer = $this->secondTime + $this->firstTime;
+        $this->answer = ($this->formula[1] == "+") ?
+             $this->firstTime->addition($this->secondTime) :
+             $this->secondTime->substraction($this->firstTime, $this->answerFormat);
+        return $this->answer;
     }
 
     public function getReeplacedText() : string
     {
-        $firstTime = date("g:i A", $this->firstTime);
-        $secondTime = date("g:i A", $this->secondTime);
-        $firstVariableReplaced = str_replace("%1", $firstTime, $this->text);
-        $textReplaced = str_replace("%2", $secondTime, $firstVariableReplaced);
-        return $textReplaced;
-    }
-
-    public function tryAnswer(int $tryingToAnswer) : bool
-    {
-        if ($this->answer == $tryingToAnswer) {
-            return true;
+        $firstTime = date("g:i A", $this->firstTime->getValue() * 60);
+        $secondTime = date("g:i A", $this->secondTime->getValue() * 60);
+        if ($this->answerFormat == Variable::TIME_TYPE) {
+            $secondTime = date("i", $this->secondTime->getValue() * 60);
         }
-        return false;
+        $firstVariableReplaced = str_replace("%1", $firstTime, $this->text);
+        return str_replace("%2", $secondTime, $firstVariableReplaced);
     }
 
+    public function tryAnswer($tryingToAnswer) : bool
+    {
+        return $this->answer->getValue($this->answerFormat) == $tryingToAnswer;
+    }
 }
 
 ?>

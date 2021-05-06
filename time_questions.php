@@ -18,9 +18,13 @@ foreach($questions as $questionIndex => $questions) {
     $session->prepareQuestion($questionIndex);
     echo $session->getQuestionText($questionIndex) . "\n";
     $answerInput = readline('Answer: ');
-    $answerInput = intval($answerInput) * 60;
-    $session->answerQuestion($questionIndex, $answerInput);
+    if (!$session->answerQuestion($questionIndex, $answerInput)) {
+        echo 'Wrong!';
+    } else {
+        echo 'Cool you did it!';
+    }
+    echo  "\n";
     echo  "\n";
 }
 echo 'Puntaje total: ' . $session->getScore() . ' / ' . $session->getTotalPoints() . "\n";
-echo 'Score (%): ' . ($session->getTotalPoints() / $session->getScore()) * 100;
+echo 'Score (%): ' .  ($session->getScore() * 100) * $session->getTotalPoints();

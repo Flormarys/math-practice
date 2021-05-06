@@ -10,7 +10,7 @@
 			"points": 5,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "minutes"
+				"answerFormat": "Minutes"
 			}
 		},
 		{
@@ -23,7 +23,7 @@
 			"points": 10,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "minutes"
+				"answerFormat": "Minutes"
 			}
 		},
 		{
@@ -36,7 +36,7 @@
 			"points": 10,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "minutes"
+				"answerFormat": "Minutes"
 			}
 		},
 		{
@@ -45,12 +45,12 @@
 				"level": 1,
 				"timeLimit": 59
 			},
-			"text": "Its %1, tell the time in %2",
+			"text": "Its %1, tell the time in %2 minutes",
 			"points": 5,
 			"operation": {
 				"formula": ["%1", "+", "%2"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -59,12 +59,12 @@
 				"level": 2,
 				"timeLimit": 59
 			},
-			"text": "If now is %1, what time will be in %2",
+			"text": "If now is %1, what time will be in %2 minutes",
 			"points": 10,
 			"operation": {
 				"formula": ["%1", "+", "%2"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -73,12 +73,12 @@
 				"level": 3,
 				"timeLimit": 59
 			},
-			"text": "Mary arrives at the cinema %2 after, the movie started at %1. Write the time that Mary arrives at the cinema.",
+			"text": "Mary arrives at the cinema %2 minutes after, the movie started at %1. Write the time that Mary arrives at the cinema.",
 			"points": 5,
 			"operation": {
 				"formula": ["%1", "+", "%2"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -87,12 +87,12 @@
 				"level": 4,
 				"timeLimit": 59
 			},
-			"text": "Each day at school the Math practice starts at %1, and finish %2 after. Write the time the Math practice ends",
+			"text": "Each day at school the Math practice starts at %1, and finish %2 minutes after. Write the time the Math practice ends",
 			"points": 10,
 			"operation": {
 				"formula": ["%1", "+", "%2"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -105,7 +105,7 @@
 			"points": 10,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "minutes"
+				"answerFormat": "Minutes"
 			}
 		},
 		{
@@ -114,12 +114,12 @@
 				"level": 4,
 				"timeLimit": 59
 			},
-			"text": "Lulu goes for a ride on her bike at% 1, she goes a long way from home when she decides to come back it takes %2 to finally make it. Tell me the time that Lulu comes home.",
+			"text": "Lulu goes for a ride on her bike at% 1, she goes a long way from home when she decides to come back it takes %2 minutes to finally make it. Tell me the time that Lulu comes home.",
 			"points": 10,
 			"operation": {
 				"formula": ["%1", "+", "%2"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -128,12 +128,12 @@
 				"level": 1,
 				"timeLimit": 59
 			},
-			"text": "Its %1, what time was it %2 ago ",
+			"text": "Its %1, what time was it %2 minutes ago ",
 			"points": 5,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -146,8 +146,8 @@
 			"points": 10,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		},
 		{
@@ -156,12 +156,12 @@
 				"level": 3,
 				"timeLimit": 59
 			},
-			"text": "Joe go to the mall %2 before meeting his friend at %1. Write the time that Joe arrives at the mall.",
+			"text": "Joe go to the mall %2 minutes before meeting his friend at %1. Write the time that Joe arrives at the mall.",
 			"points": 5,
 			"operation": {
 				"formula": ["%2", "-", "%1"],
-				"result": "time",
-				"minute": "%2"
+				"answerFormat": "Time",
+				"parameterFormat": "%2"
 			}
 		}
 	]
